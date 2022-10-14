@@ -1,5 +1,6 @@
 let express = require("express");
 const path = require("path");
+const { nextTick } = require("process");
 let app = express();
 require("dotenv").config();
 
@@ -25,6 +26,23 @@ app.get("/json", function (req, res) {
   }
   //res.json({ name: "Ade" });
 });
+
+app.get("/test", function (req, res, next) {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  res.send("Working!");
+  next();
+});
+
+app.get(
+  "/now",
+  function (req, res, next) {
+    req.time = new Date().toString();
+    next();
+  },
+  function (req, res) {
+    res.json({ time: req.time });
+  }
+);
 
 console.log("Hello World");
 
