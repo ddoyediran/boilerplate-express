@@ -44,6 +44,11 @@ app.get(
   }
 );
 
+app.get("/:word/echo", function (req, res, next) {
+  res.json({ echo: req.params.word });
+  next();
+});
+
 console.log("Hello World");
 
 module.exports = app;
