@@ -49,6 +49,13 @@ app.get("/:word/echo", function (req, res, next) {
   next();
 });
 
+app.get("/name", function (req, res) {
+  console.log(req.query);
+  let firstname = req.query.first;
+  let lastname = req.query.first;
+  res.json({ name: `: ${firstname}  ${lastname}` });
+});
+
 console.log("Hello World");
 
 module.exports = app;
