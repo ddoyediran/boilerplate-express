@@ -1,8 +1,13 @@
 let express = require("express");
 const path = require("path");
+const bodyParser = require("body-parser");
 const { nextTick } = require("process");
 let app = express();
 require("dotenv").config();
+
+const bpMiddleWare = bodyParser.urlencoded({ extended: false });
+
+app.use(bpMiddleWare);
 
 //const vee = process.env.MESSAGE_STYLE;
 
@@ -53,7 +58,7 @@ app.get("/name", function (req, res) {
   console.log(req.query);
   let firstname = req.query.first;
   let lastname = req.query.first;
-  res.json({ name: `: ${firstname}  ${lastname}` });
+  res.json({ name: `${firstname}  ${lastname}` });
 });
 
 console.log("Hello World");
